@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "biblioa": {
+      "hosting": {
+        "BibliothequeJS": [
+          "biblioa"
+        ]
+      }
+    }
+  }
+}
