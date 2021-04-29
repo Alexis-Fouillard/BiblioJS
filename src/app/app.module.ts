@@ -15,7 +15,14 @@ import {BooksService} from './services/books.service';
 import {AuthGuardService} from './services/auth-guard.service';
 import {RouterModule, Routes} from '@angular/router';
 
-// @ts-ignore
+const appRoutes: Routes = [
+  { path: 'auth/signup', component: SignupComponent },
+  { path: 'auth/signin', component: SigninComponent},
+  { path: 'books', component: BookListComponent },
+  { path: 'books/new', component: BookFormComponent },
+  { path: 'books/view/:id', component: SingleBookComponent}
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,14 +43,6 @@ import {RouterModule, Routes} from '@angular/router';
   providers: [AuthService, BooksService, AuthGuardService],
   bootstrap: [AppComponent]
 })
-
-const appRoutes: Routes = [
-  { path: 'auth/signup', component: SignupComponent },
-  { path: 'auth/signin', component: SigninComponent},
-  { path: 'books', component: BookListComponent },
-  { path: 'books/new', component: BookFormComponent },
-  { path: 'books/view/:id', component: SingleBookComponent}
-];
 
 export class AppModule { }
 
