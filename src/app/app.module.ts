@@ -15,6 +15,7 @@ import {BooksService} from './services/books.service';
 import {AuthGuardService} from './services/auth-guard.service';
 import {RouterModule, Routes} from '@angular/router';
 
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
