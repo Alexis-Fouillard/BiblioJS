@@ -6,6 +6,7 @@ import firebase from 'firebase';
 })
 
 export class AuthService {
+
   constructor() { }
 
   /**
@@ -50,6 +51,5 @@ export class AuthService {
   signOutUser() {
     firebase.auth().signOut();
   }
-
 }
 
