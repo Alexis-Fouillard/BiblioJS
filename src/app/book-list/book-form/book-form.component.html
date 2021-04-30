@@ -14,7 +14,12 @@
         <label for="synopsis">Synopsis</label>
         <textarea id="synopsis" class="form-control" formControlName="synopsis"></textarea>
       </div>
-      <button class="btn btn-success" [disabled]="bookForm.invalid" type="submit">Enregistrer</button>
+      <div class="form-group">
+        <h4>Ajouter une Photo</h4>
+        <input type="file" (change)="detectFiles($event)" class="form-control" accept="image/*">
+        <p class="text-success" *ngIf="fileUploaded">Fichier Chargé !</p>
+      </div>
+      <button class="btn btn-success" [disabled]="bookForm.invalid || fileIsUploading" type="submit">Enregistrer</button>
     </form>
   </div>
 </div>

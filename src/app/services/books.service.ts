@@ -24,10 +24,10 @@ export class BooksService {
   getBooks() {
     firebase.database().ref('/books')
       .on('value', (data: DataSnapshot) => {
-        this.books = data.val() ? data.val() : [];
-        this.emitBooks();
-      }
-    );
+          this.books = data.val() ? data.val() : [];
+          this.emitBooks();
+        }
+      );
   }
 
   constructor() {
@@ -54,6 +54,10 @@ export class BooksService {
     );
   }
 
+  /**
+   * Créer un Nouveau livre.
+   * @param newBook
+   */
   createNewBook(newBook: Book) {
     this.books.push(newBook);
     this.saveBooks();
@@ -61,6 +65,17 @@ export class BooksService {
   }
 
   removeBook(book: Book) {
+    if (book.photo) {
+      const storageRef = firebase.storage().refFromURL(book.photo);
+      storageRef.delete().then(
+        () => {
+          console.log('Photo removed !');
+        },
+        (error) => {
+          console.log('Could not remove photo ! : ' +error);
+        }
+      );
+    }
     const bookIndexToRemove = this.books.findIndex(
       (bookE1) => {
         if (bookE1 === book) {
@@ -71,6 +86,33 @@ export class BooksService {
     this.books.splice(bookIndexToRemove,1);
     this.saveBooks();
     this.emitBooks();
+  }
+
+  /**
+   * Méthode chargée d'uploader une image.
+   * @param file
+   */
+  uploadFile(file: File) {
+    return new Promise(
+      (resolve, reject) => {
+        /**Permet de ne pas avoir 2x le même nom d'image.*/
+        const almostUniqueFileName = Date.now().toString();
+        const upload = firebase.storage().ref()
+          .child('images/' +almostUniqueFileName + file.name).put(file);
+        upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
+          () => {
+            console.log('Chargement...');
+          },
+          (error) => {
+            console.log('Erreur de Chargement ! '+error);
+            reject();
+          },
+          () => {
+            resolve(upload.snapshot.ref.getDownloadURL());
+          }
+        );
+      }
+    );
   }
 
 }
