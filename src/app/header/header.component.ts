@@ -10,7 +10,7 @@ import firebase from 'firebase';
 })
 export class HeaderComponent implements OnInit {
 
-isAuth: boolean;
+  isAuth: boolean;
 
   constructor(private authService: AuthService) { }
 

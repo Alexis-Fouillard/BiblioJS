@@ -8,7 +8,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(firestore : AngularFirestore) {
+  constructor() {
 
     const config = {
       apiKey: 'AIzaSyDHHhUoOcrH4VbeHYg8_drwjUi-Na3MnSk',
@@ -22,5 +22,5 @@ export class AppComponent {
     // Initialize Firebase
     firebase.initializeApp(config);
   }
-  title : 'BibliothèqueJS';
+  title : 'BibliothequeJS';
 }
